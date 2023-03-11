@@ -1,12 +1,10 @@
-//
-// Created by suipiss on 3/10/23.
-//
 #include <iostream>
 #include <vector>
 #include <list>
 #include <fstream>
 #include <sstream>
 #include <dirent.h>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -117,6 +115,20 @@ void printAdjList(list<vector<int>> adjlist) {
     return;
 }
 
+void drawGraph(list<vector<int>> adjlist) {
+    sf::RenderWindow window(sf::VideoMode(800,600), "Graph");
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear(sf::Color::Black);
+        window.display();
+    }
+    return;
+}
+
 int main() {
     string path = "../";
     cout << "Select a file: " << endl;
@@ -126,12 +138,12 @@ int main() {
     path += filename;
     adjlist = readFile(path); // Seleccionar archivo
 
-    printAdjList(adjlist);
+    printAdjList(adjlist); // Se imprime la lista
     cout << endl;
 
     vector<vector<int>> adjmatrix;
     adjmatrix = list2matrix(adjlist);
     if (isEulerian(adjmatrix))
-        cout << "Es euleriano" << endl;
+        drawGraph(adjlist);
     return 0;
 }
