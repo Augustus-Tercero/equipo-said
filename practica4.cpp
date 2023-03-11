@@ -83,6 +83,40 @@ vector<vector<int>> list2matrix(list<vector<int>> adjlist) {
     return matrix;
 }
 
+bool isEulerian(vector<vector<int>> adjmatrix) {
+    int n = adjmatrix.size();
+    vector<int> deg(adjmatrix.size(),0);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (adjmatrix[i][j] == 1)
+                deg[i]++;
+        }
+    }
+    int j = 0;
+    for (auto i : deg) {
+        if ((i%2) == 0 )
+            j++;
+    }
+    // if (j == n)
+        // return true;
+    // else
+        // return false;
+    return (j == n);
+}
+
+void printAdjList(list<vector<int>> adjlist) {
+    int k = 0;
+    for (auto const & i : adjlist) {
+        cout << k << ": ";
+        for (auto const & j : i) {
+            cout << j << " ";
+        }
+        k++;
+        cout << endl;
+    }
+    return;
+}
+
 int main() {
     string path = "../";
     cout << "Select a file: " << endl;
@@ -92,7 +126,12 @@ int main() {
     path += filename;
     adjlist = readFile(path); // Seleccionar archivo
 
+    printAdjList(adjlist);
+    cout << endl;
+
     vector<vector<int>> adjmatrix;
     adjmatrix = list2matrix(adjlist);
+    if (isEulerian(adjmatrix))
+        cout << "Es euleriano" << endl;
     return 0;
 }
