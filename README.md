@@ -14,7 +14,7 @@ git add file.txt # Agregar tu archivo de texto a git
 git commit -m "Agregado archivo file.txt" # Capturar los cambios hechos
 git branch -M master # Seleccionar la rama 
 git remote add origin $url_repositorio # Añadir el repositorio donde vas a subir tus archivos. Este paso solo es necesario una vez.
-git push -u origin master # Subir el commit a github
+git push -u origin $brach_nombre # Subir el commit a tu branch
 ```
 ## Documentación
 + Guía básica para manejar un repositorio: https://github.com/skills/introduction-to-github
